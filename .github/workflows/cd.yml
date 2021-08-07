@@ -46,6 +46,7 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: yq eval -i 'image.tag = ${{ github.sha}}' 'wedding-static-argo/wedding/values.yaml'
+      - name: push helm repo changes
         run: |
           cd wedding-static-argo &&
           git add . &&
