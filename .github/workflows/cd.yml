@@ -37,3 +37,21 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/wedding:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/wedding:latest
+      - name: checkout helm repo
+        uses: actions/checkout@v2
+        with:
+          repository: peterstorm/wedding-static-argo
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - name: change image version in helm repo
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq eval -i 'image.tag = ${{ github.sha}}' './wedding-static-argo/wedding/values.yaml'
+      - name: push helm repo changes
+        run: |
+          cd wedding-static-argo &&
+          git add . &&
+          git commit -m "commit from github actions" &&
+          git push origin main
+
+        uses
+      
