@@ -42,9 +42,10 @@ jobs:
         with:
           repository: peterstorm/wedding-static-argo
           token: ${{ secrets.ACCESS_TOKEN }}
+      - name: change image tag in helm repo
         uses: mikefarah/yq@master
         with:
-          cmd: yq eval -i 'image.tag = ${{ github.sha}}' './wedding-static-argo/wedding/values.yaml'
+          cmd: yq eval -i 'image.tag = ${{ github.sha}}' 'wedding-static-argo/wedding/values.yaml'
         run: |
           cd wedding-static-argo &&
           git add . &&
