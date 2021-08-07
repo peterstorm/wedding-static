@@ -50,8 +50,8 @@ jobs:
       - name: push helm repo changes
         run: |
           cd wedding-static-argo &&
-          git config --global user.name 'Peter Storm'
-          git config --global user.email 'peter.storm@peterstorm.io
+          git config --global user.name 'Peter Storm' &&
+          git config --global user.email 'peter.storm@peterstorm.io' &&
           git add . &&
           git commit -m "commit from github actions" &&
           git push origin main
