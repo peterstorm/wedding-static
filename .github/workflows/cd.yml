@@ -52,6 +52,4 @@ jobs:
           git add . &&
           git commit -m "commit from github actions" &&
           git push origin main
-
-        uses
       
